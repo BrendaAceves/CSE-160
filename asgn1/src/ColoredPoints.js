@@ -75,6 +75,7 @@ let g_selectedColor=[1.0,1.0,1.0,1.0];
 let g_selectedSize = 5;
 let g_selectedType = POINT;
 let g_selectedSegments = 10;
+let g_prevPos = null;
 
 function addActionsForHtmlUI() {
   // Button Events
@@ -107,8 +108,27 @@ function main() {
   addActionsForHtmlUI();
 
   // Register function (event handler) to be called on a mouse press
-  canvas.onmousedown = click;
-  canvas.onmousemove = function(ev) { if(ev.buttons === 1) { click(ev) }};
+  canvas.onmousedown = function(ev) {
+    let [x, y] = convertCoordinatesEventToGL(ev);
+    g_prevPos = [x, y];
+    click(ev);
+  };
+
+  canvas.onmousemove = function(ev) {
+    if (ev.buttons !== 1) return;
+
+    let [x, y] = convertCoordinatesEventToGL(ev);
+
+    if (g_prevPos === null) {
+      g_prevPos = [x, y];
+      return;
+    }
+
+    drawBetweenPoints(g_prevPos, [x, y]);
+
+    g_prevPos = [x, y];
+    renderAllShapes();
+  };
 
   // Specify the color for clearing <canvas>
   gl.clearColor(0.0, 0.0, 0.0, 1.0);
@@ -116,8 +136,6 @@ function main() {
   // Clear <canvas>
   gl.clear(gl.COLOR_BUFFER_BIT);
 }
-
-
 
 var g_shapesList = [];
 
@@ -184,6 +202,39 @@ function sendTextToHTML(text, htmlID) {
     return;
   }
   htmlElm.innerHTML = text;
+}
+
+function drawBetweenPoints(p1, p2) {
+  let dx = p2[0] - p1[0];
+  let dy = p2[1] - p1[1];
+
+  let distance = Math.sqrt(dx * dx + dy * dy);
+
+  let steps = Math.floor(distance * 100);
+
+  for (let i = 0; i < steps; i++) {
+    let t = i / steps;
+
+    let x = p1[0] + dx * t;
+    let y = p1[1] + dy * t;
+
+    let shape;
+
+    if (g_selectedType == POINT) {
+      shape = new Point();
+    } else if (g_selectedType == TRIANGLE) {
+      shape = new Triangle();
+    } else {
+      shape = new Circle();
+      shape.segments = g_selectedSegments;
+    }
+
+    shape.position = [x, y];
+    shape.color = g_selectedColor.slice();
+    shape.size = g_selectedSize;
+
+    g_shapesList.push(shape);
+  }
 }
 
 function drawPicture() {
