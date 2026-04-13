@@ -1,4 +1,3 @@
-// ColoredPoint.js (c) 2012 matsuda
 // Vertex shader program
 var VSHADER_SOURCE = `
   attribute vec4 a_Position;
@@ -76,12 +75,13 @@ let g_selectedSize = 5;
 let g_selectedType = POINT;
 let g_selectedSegments = 10;
 let g_prevPos = null;
+let g_backgroundColor = [0.0, 0.0, 0.0, 1.0];
 
 function addActionsForHtmlUI() {
   // Button Events
   document.getElementById('green').onclick = function() { g_selectedColor = [0.0,1.0,0.0,1.0]; };
   document.getElementById('red').onclick   = function() { g_selectedColor = [1.0,0.0,0.0,1.0]; };
-  document.getElementById('clearButton').onclick = function() { g_shapesList=[]; gl.clearColor(0.0, 0.0, 0.0, 1.0); renderAllShapes(); };
+  document.getElementById('clearButton').onclick = function() { g_shapesList=[]; renderAllShapes(); };
 
   document.getElementById('pointButton').onclick = function() { g_selectedType=POINT };
   document.getElementById('triButton').onclick = function() { g_selectedType=TRIANGLE };
@@ -96,6 +96,13 @@ function addActionsForHtmlUI() {
   // Size slider events
   document.getElementById('sizeSlide').addEventListener('mouseup',  function() { g_selectedSize = this.value; });
   document.getElementById('segmentSlider').addEventListener('mouseup', function() { g_selectedSegments = this.value });
+
+  // Canvas background events
+  document.getElementById('bgButton').onclick = function() {
+    g_backgroundColor = g_selectedColor.slice();
+    updateBackgroundColor();
+    renderAllShapes();
+  };
 }
 
 function main() {
@@ -237,6 +244,10 @@ function drawBetweenPoints(p1, p2) {
   }
 }
 
+function updateBackgroundColor() {
+  gl.clearColor(g_backgroundColor[0],g_backgroundColor[1],g_backgroundColor[2],1.0);
+}
+
 function drawPicture() {
   g_shapesList = [];
   gl.clearColor(1.0, 1.0, 1.0, 1.0);
@@ -369,11 +380,8 @@ function drawPicture() {
     -0.3, 0.4,
   ], [0.902, 0.173, 0.298, 1]);
 
-  /**
-   *  INITIALS - black
-   */
+  // INITIALS
   // B
-
   addTri([
     -0.31, -0.55,
     -0.31, -0.65,

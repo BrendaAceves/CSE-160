@@ -2,23 +2,29 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ColoredPoints</title>
+  <title>Assignment 1: Painting</title>
 </head>
 <body onload="main()">
   <canvas id="webgl" width="400" height="400">
     Please use the browser supporting "canvas".
   </canvas>
 
-  <p id="numdot"> XXX </p>
+  <!-- <p id="numdot"> XXX </p> -->
+  <br>
+  <button type="button" id="clearButton">Clear Canvas</button>
+  <br>
 
+  <p>Drawing Mode:</p>
+  <button type="button" id="pointButton">Squares</button>
+  <button type="button" id="triButton">Triangles</button>
+  <button type="button" id="circleButton">Circles</button>
+  <br>
+
+  <p>Shape Color</p>
   <button type="button" id="green">Green</button>
   <button type="button" id="red">Red</button>
-  <button type="button" id="clearButton">Clear</button>
 
   <button type="button" id="bgButton">Set Canvas Color</button>
-  <button type="button" id="pointButton">Point</button>
-  <button type="button" id="triButton">Triangle</button>
-  <button type="button" id="circleButton">Circle</button>
 
 
   <p>
@@ -28,7 +34,7 @@
   <p>
   Blue <input type="range" min="0" max="100" value="100" class="slider" id="blueSlide">
   <p>
-  Size <input type="range" min="0" max="100" value="100" class="slider" id="sizeSlide">
+  Shape Size <input type="range" min="0" max="100" value="100" class="slider" id="sizeSlide">
   <p>
   (Circles) Segment Count: <input type="range" min="10" max="100" value="10" class="slider" id="segmentSlider">
   <p>
@@ -38,9 +44,8 @@
   
   <h5>Note: What's awesome?</h5>
   <ol>
-    <li><p>smoother drawing! (gaps are filled in while dragging mouse)</p></li>
-    <!-- <li><p></p></li>
-    <li><p></p></li> -->
+    <li><p>Smoother drawing! (gaps are filled in while dragging mouse)</p></li>
+    <li><p>Can set canvas background color using RGB sliders via <b>"Set Canvas Color"</b> button!</p></li>
   </ol>
   
   <p>Reference Drawing (Draw Picture):</p>
@@ -53,6 +58,6 @@
     <script src="Triangle.js"></script>
     <script src="Circle.js"></script>
     <script src="Point.js"></script>
-    <script src="ColoredPoints.js"></script>
+    <script src="asg1.js"></script>
   </body>
 </html>
