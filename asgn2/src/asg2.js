@@ -91,12 +91,13 @@ let g_selectedColor=[1.0,1.0,1.0,1.0];
 let g_selectedSize = 5;
 let g_selectedType = POINT;
 let g_globalAngle = 0;
+let g_moveAnimation = false;
 
 function addActionsForHtmlUI() {
 
   // Button Events (INC, cant see functions at the end)
-  document.getElementById('animationYellowOffButton').onclick = function() { g_yellowAnimation = false; }
-  document.getElementById('animationYellowOnButton').onclick = function() { g_yellowAnimation = true; }
+  document.getElementById('animationMoveOffButton').onclick = function() { g_moveAnimation = false; }
+  document.getElementById('animationMoveOnButton').onclick = function() { g_moveAnimation = true; }
 
   // Color Slider Events
   // document.getElementById('yellowSlide').addEventListener('mousemove',   function() { this.value; renderScene(); });
@@ -142,9 +143,11 @@ function tick() {
 
 // Update the angles of everything if currently animated
 function updateAnimationAngles() {
-  g_thighAngle = 30 * Math.sin(g_seconds);
-  g_calfAngle = 20 * Math.sin(g_seconds + 0.5);
-  g_footAngle = 10 * Math.sin(g_seconds + 1);
+  if (g_moveAnimation) {
+    g_thighAngle = 30 * Math.sin(g_seconds);
+    g_calfAngle = 20 * Math.sin(g_seconds + 0.5);
+    g_footAngle = 10 * Math.sin(g_seconds + 1);
+  }
 }
 
 let g_thighAngle = 0;
