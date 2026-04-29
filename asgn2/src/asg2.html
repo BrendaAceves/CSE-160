@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Assignment 1: Painting</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+      Please use the browser supporting "canvas".
+    </canvas>
+
+    <!-- <p> Magenta <input type="range" min="0" max="100" value="100" class="slider" id="magentaSlide"></p>
+    <p> Yellow <input type="range" min="0" max="100" value="100" class="slider" id="yellowSlide"></p> -->
+    <p> Animation: </p>
+    <button type="button" id="animationYellowOnButton">ON</button>
+    <button type="button" id="animationYellowOffButton">OFF</button>
+
+    <p>Thigh <input type="range" id="thighSlide" min="-45" max="45"></p>
+    <p>Calf <input type="range" id="calfSlide" min="-45" max="45"></p>
+    <p>Foot <input type="range" id="footSlide" min="-45" max="45"></p>
+
+    <p> Camera Angle <input type="range" min="0" max="360" value="5" class="slider" id="angleSlide"></p>
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Point.js"></script>
+    <script src="Cube.js"></script>
+    <script src="asg2.js"></script>
+  </body>
+</html>
