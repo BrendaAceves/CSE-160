@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Assignment 3: Creating a Virtual World</title>
+  </head>
+
+  <body onload="main()">
+    <canvas id="webgl" width="400" height="400">
+      Please use the browser supporting "canvas".
+    </canvas>
+
+    <div id="timer">Time Left: 60</div>
+
+    <div id="fps">FPS: 0</div>  
+      
+    <div id="hud">
+      WASD Move<br>
+      Q/E Rotate<br>
+      Mouse Look<br>
+      F Add Block<br>
+      G Remove Block<br>
+      Click Delete Block<br>
+      Right Click Add Block<br>
+    </div>
+
+
+    <script src="../lib/webgl-utils.js"></script>
+    <script src="../lib/webgl-debug.js"></script>
+    <script src="../lib/cuon-utils.js"></script>
+    <script src="../lib/cuon-matrix.js"></script>
+    <script src="Triangle.js"></script>
+    <script src="Circle.js"></script>
+    <script src="Point.js"></script>
+    <script src="Cube.js"></script>
+    <script src="Camera.js"></script>
+    <script src="asg3.js"></script>
+  </body>
+</html>
